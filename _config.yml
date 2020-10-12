@@ -1,6 +1,6 @@
 # main text of home
 name: Daniele Ballinari
-bio: PhD student in Economics and Finance
+bio: PhD student in Economics and Finance at the University of St. Gallen
 
 # twitter summary info
 description: A blog about technology and stuff related
@@ -22,7 +22,7 @@ url: https://dballinari.github.io
 permalink: /:title/
 
 # To enable google analytics, supply your token below
-# analytics-google: 'UA-MYANALYTICS'
+analytics-google: 'UA-180331690-1'
 
 # To enable piwik tracking, supply your url & site ID below
 # analytics-piwik-url: 'piwik.my-host.com'

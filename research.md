@@ -27,6 +27,6 @@ layout: page
 <h2>Projects</h2>
 
 <ul>
-	<li>Swiss National Science Foundation Project <i>Sentiment Analysis and Bayesian Model Averaging for Volatility Prediction<\i> (2017-2020).</li>
+	<li>Swiss National Science Foundation Project <i>Sentiment Analysis and Bayesian Model Averaging for Volatility Prediction</i> (2017-2020).</li>
 	<li><a href="http://sentivol.ch/">SentiVol</a>: a webpage for making daily volatility forecasts based on investor attention, jointly with Francesco Audrino and Fabio Sigrist. </li>
 </ul>
