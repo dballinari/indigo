@@ -2,7 +2,6 @@
 title: About
 layout: page
 ---
-![Profile Image]({% if site.external-image %}{{ site.picture }}{% else %}{{ site.url }}/{{ site.picture }}{% endif %})
 
 <p>I'm a PhD candidate in Economic and Finance at the University of St. Gallen. 
 My research interests focus on applied financial econometrics and the use of new 
