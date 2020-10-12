@@ -1,7 +1,6 @@
 ---
 title: Research
 layout: page
-permalink: /research/index.html
 ---
 
 
