@@ -18,7 +18,7 @@ layout: page
 <ul>
 	<li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3709775">Retail investors’ trading activity and the predictability of stock return correlations</a>, 
 		2020. </li>
-	<li><a href="https://ssrn.com/abstract=3418436">When Does Attention Matter? The Effect of Investor Attention on Stock Market Volatility Around News Releases</a>,
+	<li><a href="https://ssrn.com/abstract=3506720">When Does Attention Matter? The Effect of Investor Attention on Stock Market Volatility Around News Releases</a>,
 		2020, jointly with Francesco Audrino and Fabio Sigrist.</li>
 	<li><a href="https://ssrn.com/abstract=3418436">How to Gauge Investor Behavior? A Comparison of Online Investor Sentiment Measures</a>,
 		2019, jointly with Simon Beherendt.</li>
