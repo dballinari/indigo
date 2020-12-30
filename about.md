@@ -3,8 +3,9 @@ title: About
 layout: page
 ---
 
-<p>I'm a PhD candidate in Economics and Finance at the University of St. Gallen. 
-My research interests focus on applied financial econometrics and new data 
+<p>I'm a Postdoctoral researcher at the Faculty of Business and Economics of the University
+of Basel. I obtained my PhD in Economics and Finance from the University of St. Gallen in 
+2020. My research interests focus on applied financial econometrics and new data 
 sources to improve existing models. In my current projects, I analyze 
 the influence and predictive power of retail investors' behavior for the 
 distribution of stock prices in more detail. In particular, using online social 
