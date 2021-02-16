@@ -3,6 +3,10 @@ title: Research
 layout: page
 ---
 
+<style>
+    ul li { margin-bottom: 10px; }
+</style>
+
 
 <h2>Publications</h2>
 
