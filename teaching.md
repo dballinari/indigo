@@ -8,3 +8,6 @@ layout: page
 </style>
 
 
+<ul>
+	<li>Introduction to Time Series Econometrics, Fall 2021, <i>University of Basel</i>. </li>
+</ul>

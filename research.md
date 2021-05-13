@@ -26,8 +26,7 @@ layout: page
 		2020, jointly with Francesco Audrino and Fabio Sigrist. (Under review)</li>
 	<li><a href="https://ssrn.com/abstract=3418436">How to Gauge Investor Behavior? A Comparison of Online Investor Sentiment Measures</a>,
 		2020, jointly with Simon Behrendt. (Under review)</li>
-	<li><a href="https://www.researchgate.net/publication/349346230_Je_ne_regrette_rien_An_Empirical_Test_of_Regret_Theory_and_Stock_Returns">Je ne regrette rien? An Empirical Test of Regret Theory and Stock Returns</a>,
-		2021, jointly with Cédric Müller.</li>
+	<li>Je ne regrette rien? An Empirical Test of Regret Theory and Stock Returns, 2021, jointly with Cédric Müller. [<a href="https://www.researchgate.net/publication/349346230_Je_ne_regrette_rien_An_Empirical_Test_of_Regret_Theory_and_Stock_Returns">Paper</a>]</li>
 </ul>
 
 <h2>Work in progress</h2>
