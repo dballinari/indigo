@@ -30,6 +30,12 @@ layout: page
 		2021, jointly with Cédric Müller.</li>
 </ul>
 
+<h2>Work in progress</h2>
+<ul>
+	<li><i>Investors' taste for sustainability</i> with Prof. Mahmoud.</li>
+</ul>
+
+
 <h2>Projects & Funding</h2>
 
 <ul>
