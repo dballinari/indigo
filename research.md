@@ -11,22 +11,22 @@ layout: page
 <h2>Publications</h2>
 
 <ul>
-	<li><a href="https://doi.org/10.1016/j.ijforecast.2019.05.010">The impact of sentiment and attention measures on stock market volatility</a>, 
-		2020, <i>International Journal of Forecasting</i>, jointly with Francesco Audrino and Fabio Sigrist. </li>
-	<li><a href="https://doi.org/10.1016/j.frl.2020.101479">Structural breaks in online investor sentiment: A note on the nonstationarity of financial chatter</a>,
-		2020,  <i>Finance Research Letters</i>, jointly with Simon Behrendt.</li>
+	<li>The impact of sentiment and attention measures on stock market volatility, 
+		2020, <i>International Journal of Forecasting</i>, jointly with Francesco Audrino and Fabio Sigrist. [<a href="https://doi.org/10.1016/j.ijforecast.2019.05.010">Paper</a>]</li>
+	<li>Structural breaks in online investor sentiment: A note on the nonstationarity of financial chatter,
+		2020,  <i>Finance Research Letters</i>, jointly with Simon Behrendt. [<a href="https://doi.org/10.1016/j.frl.2020.101479">Paper</a>]</li>
 </ul>
 
 <h2>Working papers</h2>
 
 <ul>
-	<li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3709775">Retail investors’ trading activity and the predictability of stock return correlations</a>, 
-		2020. </li>
-	<li><a href="https://ssrn.com/abstract=3506720">When Does Attention Matter? The Effect of Investor Attention on Stock Market Volatility Around News Releases</a>,
-		2020, jointly with Francesco Audrino and Fabio Sigrist. (Under review)</li>
-	<li><a href="https://ssrn.com/abstract=3418436">How to Gauge Investor Behavior? A Comparison of Online Investor Sentiment Measures</a>,
-		2020, jointly with Simon Behrendt. (Under review)</li>
-	<li>Je ne regrette rien? An Empirical Test of Regret Theory and Stock Returns, 2021, jointly with Cédric Müller. [<a href="https://www.researchgate.net/publication/349346230_Je_ne_regrette_rien_An_Empirical_Test_of_Regret_Theory_and_Stock_Returns">Paper</a>]</li>
+	<li>Retail investors’ trading activity and the predictability of stock return correlations, 
+		2020. [<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3709775">Paper</a>]</li>
+	<li>When Does Attention Matter? The Effect of Investor Attention on Stock Market Volatility Around News Releases, 2020, 
+		jointly with Francesco Audrino and Fabio Sigrist. (Under review) [<a href="https://ssrn.com/abstract=3506720">Paper</a>]</li>
+	<li>How to Gauge Investor Behavior? A Comparison of Online Investor Sentiment Measures,
+		2020, jointly with Simon Behrendt. (Under review) [<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3418436">Paper</a>]</li>
+	<li>Je ne regrette rien? An Empirical Test of Regret Theory and Stock Returns, 2021, jointly with Cédric Müller. [<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3786835">Paper</a>]</li>
 </ul>
 
 <h2>Work in progress</h2>
