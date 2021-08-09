@@ -16,7 +16,7 @@ layout: page
 	<li><i>Structural breaks in online investor sentiment: A note on the nonstationarity of financial chatter</i>,
 		2020,  Finance Research Letters, jointly with Simon Behrendt. [<a href="https://doi.org/10.1016/j.frl.2020.101479">Paper</a>]</li>
 	<li><i>How to Gauge Investor Behavior? A Comparison of Online Investor Sentiment Measures</i>,
-		2021, Forthcoming Digital Finance, jointly with Simon Behrendt. [<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3418436">Paper</a>]</li>
+		2021, Digital Finance, jointly with Simon Behrendt. [<a href="https://link.springer.com/article/10.1007/s42521-021-00038-2">Paper</a>]</li>
 </ul>
 
 <h2>Working papers</h2>
