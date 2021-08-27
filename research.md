@@ -23,8 +23,8 @@ layout: page
 
 <ul>
 	<li><i>Retail investors’ trading activity and the predictability of stock return correlations</i>, 
-		2020. [<a href="https://ssrn.com/abstract=3709775">Paper</a>]</li>
-	<li><i>When Does Attention Matter? The Effect of Investor Attention on Stock Market Volatility Around News Releases</i>, 2020, 
+		2021. [<a href="https://ssrn.com/abstract=3709775">Paper</a>]</li>
+	<li><i>When Does Attention Matter? The Effect of Investor Attention on Stock Market Volatility Around News Releases</i>, 2021, 
 		jointly with Francesco Audrino and Fabio Sigrist. [<a href="https://ssrn.com/abstract=3506720">Paper</a>]</li>
 	<li><i>Je ne regrette rien? An Empirical Test of Regret Theory and Stock Returns</i>, 2021, jointly with Cédric Müller. [<a href="https://ssrn.com/abstract=3786835">Paper</a>]</li>
 </ul>
