@@ -27,13 +27,8 @@ layout: page
 	<li><i>When Does Attention Matter? The Effect of Investor Attention on Stock Market Volatility Around News Releases</i>, 2021, 
 		jointly with Francesco Audrino and Fabio Sigrist. [<a href="https://ssrn.com/abstract=3506720">Paper</a>]</li>
 	<li><i>Je ne regrette rien? An Empirical Test of Regret Theory and Stock Returns</i>, 2021, jointly with Cédric Müller. [<a href="https://ssrn.com/abstract=3786835">Paper</a>]</li>
+	<li><i>From Chatter to Action: An Index of Sustainability Sentiment</i>, 2021, jointly with Ola Mahmoud. [<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3964819">Paper</a>]</li>
 </ul>
-
-<h2>Work in progress</h2>
-<ul>
-	<li><i>Investors' taste for sustainability</i> with Prof. Mahmoud.</li>
-</ul>
-
 
 <h2>Projects & Funding</h2>
 
