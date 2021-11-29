@@ -10,5 +10,5 @@ layout: page
 <h2>Teaching</h2>
 
 <ul>
-	<li>Introduction to Time Series Econometrics, Fall 2021, <i>University of Basel</i>. </li>
+	<li>Introduction to Time Series Econometrics, Fall 2021, <i>University of Basel</i>. [<a href="assets\script_itse.pdf">Script</a>] </li>
 </ul>
