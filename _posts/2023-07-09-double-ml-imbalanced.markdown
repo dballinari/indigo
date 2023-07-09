@@ -5,7 +5,7 @@ date: 2023-07-09 17:30
 image: /assets/images/markdown.jpg
 headerImage: false
 tag:
-- double-ml
+- ml
 - unbalanced
 - ate
 category: blog
