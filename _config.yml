@@ -53,6 +53,12 @@ github: dballinari
 email: daniele.ballinari@gmail.com
 
 authors:
+  danieleballinari:
+    name: Daniele Ballinari
+    bio: Statistic's enthusiast
+    external-image: false
+    picture: assets/images/my_profile.jpg
+    twitter: DBallinari
   johndoe:
     name: John Doe
     bio: A Man who travels the world eating noodles
@@ -102,7 +108,7 @@ post-advance-links: [blog]
 show-author: true
 
 # do you want some animations?
-animation: true
+animation: false
 
 # add default values to specific pages or layouts
 defaults:
