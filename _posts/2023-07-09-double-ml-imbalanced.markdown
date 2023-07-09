@@ -1,16 +1,16 @@
 ---
-title: "Markdown Extra Components"
+title: "Double-debiased machine learning with unbalanced treatment assignment"
 layout: post
-date: 2016-02-24 22:48
+date: 2023-07-09 17:30
 image: /assets/images/markdown.jpg
 headerImage: false
 tag:
-- markdown
-- components
-- extra
+- double-ml
+- unbalanced
+- ate
 category: blog
 author: danieleballinari
-description: Markdown summary with different options
+description: Adjusting for unbalanced treatment assignment in double-debiased machine learning
 ---
 
 ## Summary:
