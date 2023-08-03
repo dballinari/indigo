@@ -131,7 +131,7 @@ Notice that here we can estimated $\gamma$ using the entire dataset, and not a c
 
 <details>
   <summary>Proof of the asymptotic properties</summary>
-  <em>
+  
   The proof of the asymptotic properties of the UC-DR estimator is very similar to the proof of the classical doubly-robust estimator as outlined in Stefan Wager's script[^1]. In the following I will therefore only cover the differences in the proofs to try to keep this part as short as possible.
  
   Notice that estimator of $\gamma$ is simply a maximum likelihood estimator for which we have that $|\hat\gamma - \gamma|= o_p(n^{-1/2})$. Moreover, I assume that $\epsilon < \gamma < 1 - \epsilon$ for $\epsilon>0$. 
@@ -233,7 +233,6 @@ Notice that here we can estimated $\gamma$ using the entire dataset, and not a c
   
   where the first the first term in the last step is $o(N^{-1/2})$ by the risk-decay assumption and the second term is $o(N^{-1/2})$ by the convergence rate of $\hat\gamma$ and sup-consistency of $\hat\mu_1$. The positive constants $c_1$ and $c_2$ come from the boundedness of $e_S$ and $\gamma$ (and that of their respective estimators). Combined with the law of large numbers, we can conclude that the term (C) is $o_p(N^{-1/2})$. This concludes the proof of the theorem as all three terms (A), (B) and (C) are $o_p(N^{-1/2})$.
 
-  </em>
 </details>
 
 ## A small simulation study
