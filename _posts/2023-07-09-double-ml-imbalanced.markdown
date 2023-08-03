@@ -131,32 +131,102 @@ Notice that here we can estimated $\gamma$ using the entire dataset, and not a c
 
 <details>
   <summary>Proof of the asymptotic properties</summary>
+  <em>
+  The proof of the asymptotic properties of the UC-DR estimator is very similar to the proof of the classical doubly-robust estimator as outlined in Stefan Wager's script[^1]. In the following I will therefore only cover the differences in the proofs to try to keep this part as short as possible.
+ 
+  Notice that estimator of $\gamma$ is simply a maximum likelihood estimator for which we have that $|\hat\gamma - \gamma|= o_p(n^{-1/2})$. Moreover, I assume that $\epsilon < \gamma < 1 - \epsilon$ for $\epsilon>0$. 
+
+  I will assume that the previously mentioned conditions hold for the undersampled machine learner:
+  - Overlap: $\eta < e_S(x) < 1-\eta$ for $\eta>0$ and for all $x \in \mathcal{X}$.
+  - Consistency:
   
-      The proof of the asymptotic properties of the UC-DR estimator is very similar to the proof of the classical doubly-robust estimator as outlined in Stefan Wager's script[^1]. In the following I will therefore only cover the differences in the proofs to try to keep this part as short as possible.
-       
-      Notice that estimator of $\gamma$ is simply a maximum likelihood estimator for which we have that $|\hat\gamma - \gamma|= o_p(n^{-1/2})$. Moreover, I assume that $\epsilon < \gamma < 1 - \epsilon$ for $\epsilon>0$.
-    
-      I will assume that the previously mentioned conditions hold for the undersampled machine learner:
-      - Overlap: $\eta < e_S(x) < 1-\eta$ for $\eta>0$ and for all $x \in \mathcal{X}$.
-      - Consistency:
-      
-      $$
-        \sup_{x \in \mathcal{X}} |\hat{e}_S(x) - e_S(x)| \xrightarrow{p} 0
-      $$
-      
-      - Risk decay:
-      $$
-        E\left[\left(\hat{\mu}_d(X) - \mu_d(X)\right)^2\right] E\left[\left(\hat{e}_S(x) - e_S(X)\right)^2\right] = o(n^{-1}).
-      $$
-      
-      Now by noticing that
-      
-      $$
-      |\hat{e}_S(x)\hat\gamma - e_S(X)\gamma| = |\hat{e}_S(x)\hat\gamma - e_S(X)\hat\gamma + e_S(X)\hat\gamma - e_S(X)\gamma| \leq |\hat{e}_S(x) - e_S(X)| |\hat\gamma| + |\hat\gamma - \gamma| |e_S(X)| \leq |\hat{e}_S(x) - e_S(X)| + |\hat\gamma - \gamma| 
-      $$
+  $$
+    \sup_{x \in \mathcal{X}} |\hat{e}_S(x) - e_S(x)| \xrightarrow{p} 0
+  $$
   
-     we can conclude that $\hat{e}_S(x)\hat\gamma$ is sup-norm consistent and therefore, thanks to the overlap assumption, $\hat{e}(X)$ is also sup-norm consistent.
+  - Risk decay:
   
+  $$
+    E\left[\left(\hat{\mu}_d(X) - \mu_d(X)\right)^2\right] E\left[\left(\hat{e}_S(x) - e_S(X)\right)^2\right] = o(n^{-1}).
+  $$
+  
+  Now by noticing that
+  
+  $$
+  \begin{aligned}
+  |\hat{e}_S(x)\hat\gamma - e_S(X)\gamma| &= |\hat{e}_S(x)\hat\gamma - e_S(X)\hat\gamma + e_S(X)\hat\gamma - e_S(X)\gamma|\\ 
+  & \leq |\hat{e}_S(x) - e_S(X)| |\hat\gamma| + |\hat\gamma - \gamma| |e_S(X)|\\ &\leq |\hat{e}_S(x) - e_S(X)| + |\hat\gamma - \gamma| 
+  \end{aligned}
+  $$
+  
+  we can conclude that $\hat{e}_S(x)\hat\gamma$ is sup-norm consistent and therefore, thanks to the overlap assumption, $\hat{e}(X)$ is also sup-norm consistent.
+  
+  From here I follow the proof in Wager's script. I will focus on an estimator for $\theta_1=E[Y(1)]$. Extending this proof to the ATE estimator is straight forward since $\theta=\theta_1 - \theta_0$. First, if we would know the true functions $\mu_1(X)$ and $e(X)$, the oracle estimator:
+  
+  $$
+  \widetilde\theta_1 = \frac{1}{N} \sum_{i=1}^N \left(\mu_1(X_i) + \frac{D_i(Y_i-\mu_1(X_i))}{e(X_i)}\right)
+  $$
+  
+  would simply be an average of independent random variables and by the central limit theorem we would have that $\sqrt{N}(\widetilde\theta_1 - \theta_1) \xrightarrow{d} \mathcal{N}(0, V^*)$. Next, if we can show that $\sqrt{N}(\widetilde\theta_1 - \hat\theta_1)=o_p(1)$, we can conclude that our estimator converges to the same distribution as the oracle estimator.
+  
+  Since I use cross-fitting for the estimation, I can rewrite the estimator as follows:
+  
+  $$
+  \hat\theta_1 = \frac{|\mathcal{I}_1|}{N} \hat\theta_1^{\mathcal{I}_1} + \frac{|\mathcal{I}_2|}{N} \hat\theta_1^{\mathcal{I}_2}, \qquad \hat\theta_1^{\mathcal{I}_1} = \frac{1}{|\mathcal{I}_1|} \sum_{i \in \mathcal{I}_1} \left(\hat{\mu}_1^{\mathcal{I}_2^S}(X_i) + \frac{D_i(Y_i-\hat{\mu}^{\mathcal{I}_2^S}_1(X_i))}{\hat{e}^{\mathcal{I}_2^S}(X_i)}\right).
+  $$
+  
+  So it is sufficient to show that $\sqrt{N}(\widetilde\theta_1^{\mathcal{I}_1} - \hat\theta_1^{\mathcal{I}_1})=o_p(1)$. Stefan wager shows how we can decompose the difference into three terms:
+  
+  $$
+  \begin{aligned}
+  \widetilde\theta_1^{\mathcal{I}_1} - \hat\theta_1^{\mathcal{I}_1} &= \frac{1}{|\mathcal{I}_1|} \sum_{i \in \mathcal{I}_1} \left( \left(\hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i)\right) \left(1-\frac{D_i}{e(X_i)}\right) \right)\qquad \text{(A)}\\ 
+  &+ \frac{1}{|\mathcal{I}_1|} \sum_{i \in \mathcal{I}_1} D_i \left( \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) \right) \qquad \text{(B)}\\ 
+  &- \frac{1}{|\mathcal{I}_1|} \sum_{i \in \mathcal{I}_1} D_i \left( \left(\hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i)\right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) \right) \qquad \text{(C)}.
+  \end{aligned}
+  $$
+  
+  We therefore have to show that each of these three components converge to zero at rate $N^{-1/2}$. First, (A) does not dependent on the estimation of the propensity score, and we can therefore use the same argument as in Stefan Wager's script, which is why I will skip this part of the proof. Second, I compute the squared $L_2$-norm of (B):
+  
+  $$
+  \begin{aligned}
+  \left\|\frac{1}{|\mathcal{I}_1|} \sum_{i \in \mathcal{I}_1} D_i \left( \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) \right)\right\|_2^2 &= E\left[ \left(\frac{1}{|\mathcal{I}_1|} \sum_{i \in \mathcal{I}_1} D_i  \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) \right)^2 \right]\\
+  &= E\left[ E\left[  \left(\frac{1}{|\mathcal{I}_1|} \sum_{i \in \mathcal{I}_1} D_i  \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) \right)^2 \Bigg|\mathcal{I}_2^S, D_1, \dots, D_N  \right] \right]\\
+  &= E\left[ Var\left[  \frac{1}{|\mathcal{I}_1|} \sum_{i \in \mathcal{I}_1} D_i  \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right)  \Bigg|\mathcal{I}_2^S, D_1, \dots, D_N  \right] \right]\\
+  &= \frac{1}{|\mathcal{I}_1|^2} E\left[  \sum_{i \in \mathcal{I}_1} Var\left[   D_i  \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right)  \Bigg|\mathcal{I}_2^S, D_1, \dots, D_N  \right] \right]\\
+  &= \frac{1}{|\mathcal{I}_1|} E\left[ Var\left[   D_i  \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right)  \Bigg|\mathcal{I}_2^S, D_1, \dots, D_N  \right] \right]\\
+  &= \frac{1}{|\mathcal{I}_1|} E\left[ D_i  \left( Y_i - \mu_1(X_i) \right)^2 \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right)^2 \right]\\
+  &=\dots= \frac{o(1)}{N}
+  \end{aligned}
+  $$
+  
+  I skipped the last steps since, thanks to the sup-consistency of the calibrated propensity score estimator, they coincide with the proof of the double-robust estimator. The main difference to the usual proof is the fact that I had to condition not only on the (undersampled) estimation sample, but also on the treatment assignments of the entire sample $\{D_i\}_{i=1,\dots, N}$. This step is necessary, since the calibrated propensity score depends on $\hat\gamma$ which is estimated over the entire sample. Despite this, the elements in the sum are still uncorrelated (forth equality):
+  
+  $$
+  Cov\left[D_i  \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right), D_j  \left( Y_j - \mu_1(X_j) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_j)}-\frac{1}{e(X_j)}\right) \Bigg|\mathcal{I}_2^S, D_1, \dots, D_N \right] \\
+  = E\left[ D_i  \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) D_j  \left( Y_j - \mu_1(X_j) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_j)}-\frac{1}{e(X_j)}\right) \Bigg|\mathcal{I}_2^S, D_1, \dots, D_N \right] \\
+  = E\left[ D_i \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) D_j   \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_j)}-\frac{1}{e(X_j)}\right) E\left[ \left( Y_i - \mu_1(X_i) \right) \Big|X_i, D_i \right] E\left[ \left( Y_j - \mu_1(X_j) \right) \Big|X_j, D_j \right] \Bigg|\mathcal{I}_2^S, D_1, \dots, D_N \right] = 0
+  $$
+  
+  by the law of iterated expectations and the fact that the observations are independent.
+  Lastly, we can focus on the (C):
+  
+  $$
+  \begin{aligned}
+  E\left[ \left( \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) \right] & \leq E\left[ \left| \left( \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) \right| \right] \\
+  & = E\left[ \left| \left( \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \right) \left(\frac{1}{\gamma e_S(X_i)} - \frac{1}{\hat\gamma \hat{e}^{\mathcal{I}_2^S}_S(X_i)} -\frac{1}{\gamma}+\frac{1}{\hat\gamma}\right) \right| \right]\\
+  & \leq E\left[ \Bigg| \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \Bigg| \left| \left(\frac{1}{\gamma e_S(X_i)} - \frac{1}{\hat\gamma \hat{e}^{\mathcal{I}_2^S}_S(X_i)}\right) + \left(\frac{1}{\hat\gamma}-\frac{1}{\gamma} \right)\right| \right] \\
+  & \leq E\left[ \Bigg| \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \Bigg| \left|\frac{1}{\gamma e_S(X_i)} - \frac{1}{\hat\gamma \hat{e}^{\mathcal{I}_2^S}_S(X_i)}\right| \right] + E\left[ \Bigg| \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \Bigg| \left|\frac{1}{\hat\gamma}-\frac{1}{\gamma}\right| \right] \\
+  & \leq c_1 E\left[ \left| \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \right| \left| \hat\gamma \hat{e}^{\mathcal{I}_2^S}_S(X_i) - \gamma e_S(X_i)\right| \right] + c_2 E\left[ \left| \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \right| \left|\gamma-\hat\gamma\right| \right] \\
+    & = c_1 E\left[ \left| \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \right| \left| \hat{e}^{\mathcal{I}_2^S}_S(X_i) - e_S(X_i)\right| |\hat\gamma | \right] + c_1 E\left[ \left| \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \right| \left| \hat\gamma - \gamma \right| |e_S(X_i)| \right] + c_2 E\left[ \left| \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \right| \left|\gamma-\hat\gamma\right| \right]\\
+    & \leq c_1 E\left[ \left| \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \right| \left| \hat{e}^{\mathcal{I}_2^S}_S(X_i) - e_S(X_i)\right| \right] + c_1 E\left[ \left| \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \right| \left| \hat\gamma - \gamma \right|\right] + c_2 E\left[ \left| \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \right| \left|\gamma-\hat\gamma\right| \right] \\
+    & \leq c_1 \|\hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \|_2 \|\hat{e}^{\mathcal{I}_2^S}_S(X_i) - e_S(X_i) \|_2 + (c_1+c_2) \|\hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \|_2 \|\hat\gamma -\gamma \|_2\\
+    & = o(N^{-1/2}) + o(N^{-1/2}) = o(N^{-1/2})	
+    \end{aligned}
+  $$
+  
+  where the first the first term in the last step is $o(N^{-1/2})$ by the risk-decay assumption and the second term is $o(N^{-1/2})$ by the convergence rate of $\hat\gamma$ and sup-consistency of $\hat\mu_1$. The positive constants $c_1$ and $c_2$ come from the boundedness of $e_S$ and $\gamma$ (and that of their respective estimators). Combined with the law of large numbers, we can conclude that the term (C) is $o_p(N^{-1/2})$. This concludes the proof of the theorem as all three terms (A), (B) and (C) are $o_p(N^{-1/2})$.
+
+  </em>
 </details>
 
 ## A small simulation study
