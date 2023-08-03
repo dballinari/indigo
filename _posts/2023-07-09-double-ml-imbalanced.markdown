@@ -179,7 +179,7 @@ All the results are summarized in the table below. They show that:
 1. **U-DR and UC-DR perform similarly in small samples:**
 In small sample sizes with highly unbalanced treatment assignment, the U-DR and UC-DR estimators exhibit comparable performance in estimating causal effects. The UC-DR estimator has, however, a larger variance. This can be explained by the fact that an additional parameter has to be estimated ($\hat\gamma$).
 
-2. **UC-DR excels with increased observations and decreasing unbalancedness:**
+2. **UC-DR excels with increased observations:**
 As the number of observations increases, the UC-DR estimator outperforms the U-DR estimator. Thanks to the adjustment, the UC-DR estimator can use more data to estimate the ATE and to train the policy learning classifier. This leads to a lower bias and a more accurate treatment assignment. However, the additional data used by the UC-DR estimator cannot offset the variance related with the estimation of $\hat\gamma$. In fact, the U-DR estimator still has the lowest RMSE.
 
 3. **Limitations of baseline DR estimator in highly unbalanced samples:**
@@ -208,7 +208,7 @@ The baseline DR estimator, although widely used, faces challenges when the sampl
 
 ## Conclusion
 
-So which estimator should we use in practice when dealing with unbalanced treatment assignment? As in many cases: it depends. If the sample is small and highly unbalanced, undersampling is a good choice. If the sample is large I would recommend to undersample only the data used to train the machine learning models and then adjust the propensity score predictions. This will allow to use more data to estimate the ATE or to train other models on the $\hat\tau_i$. This could be particularly useful when we are interested in conditional treatment effects or in solving a policy learning problem. In any case, the baseline doubly-robust estimator should be avoided in highly unbalanced samples, unless we have a very large sample size.
+So which estimator should we use in practice when dealing with unbalanced treatment assignment? As in many cases: it depends. If the sample is small and highly unbalanced, undersampling is a good choice. If the sample is large I would recommend to undersample only the data used to train the machine learning models and then adjust the propensity score predictions. This will allow to use more data to estimate the ATE or to train other models on the $\hat\tau_i$. This could be particularly useful when we are interested in estimating more complex quantities, such as the conditional treatment effect or a policy learning problem. In any case, the baseline doubly-robust estimator should be avoided in highly unbalanced samples, unless we have a very large sample size.
 
 
 ## *Proof of the asymptotic properties*
