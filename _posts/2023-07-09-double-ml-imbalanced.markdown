@@ -213,26 +213,26 @@ So which estimator should we use in practice when dealing with unbalanced treatm
 
 ## Proof of the asymptotic properties
 
-  The proof of the asymptotic properties of the UC-DR estimator is very similar to the proof of the classical doubly-robust estimator as outlined in Stefan Wager's script[^1]. In the following I will therefore only cover the differences in the proofs to try to keep this part as short as possible.
+  *The proof of the asymptotic properties of the UC-DR estimator is very similar to the proof of the classical doubly-robust estimator as outlined in Stefan Wager's script[^1]. In the following I will therefore only cover the differences in the proofs to try to keep this part as short as possible.*
  
-  Notice that the estimator of $\gamma$ is simply a maximum likelihood estimator for which we have that $|\hat\gamma - \gamma|= o_p(n^{-1/2})$. 
-  Moreover, I assume that $\epsilon < \gamma < 1 - \epsilon$ for $\epsilon>0$. 
+  *Notice that the estimator of $\gamma$ is simply a maximum likelihood estimator for which we have that $|\hat\gamma - \gamma|= o_p(n^{-1/2})$. 
+  Moreover, I assume that $\epsilon < \gamma < 1 - \epsilon$ for $\epsilon>0$.*
 
-  I will assume that the previously mentioned conditions hold for the undersampled machine learner:
-  - Overlap: $\eta < e_S(x) < 1-\eta$ for $\eta>0$ and for all $x \in \mathcal{X}$.
-  - Consistency:
+  *I will assume that the previously mentioned conditions hold for the undersampled machine learner:*
+  - *Overlap: $\eta < e_S(x) < 1-\eta$ for $\eta>0$ and for all $x \in \mathcal{X}$.*
+  - *Consistency:*
   
   $$
     \sup_{x \in \mathcal{X}} |\hat{e}_S(x) - e_S(x)| \xrightarrow{p} 0
   $$
   
-  - Risk decay:
+  - *Risk decay:*
   
   $$
     E\left[\left(\hat{\mu}_d(X) - \mu_d(X)\right)^2\right] E\left[\left(\hat{e}_S(x) - e_S(X)\right)^2\right] = o(n^{-1}).
   $$
   
-  Now by noticing that
+  *Now by noticing that*
   
   $$
   \begin{aligned}
@@ -241,23 +241,23 @@ So which estimator should we use in practice when dealing with unbalanced treatm
   \end{aligned}
   $$
   
-  we can conclude that $\hat{e}_S(x)\hat\gamma$ is sup-norm consistent and therefore, thanks to the overlap assumption, $\hat{e}(X)$ is also sup-norm consistent.
+  *we can conclude that $\hat{e}_S(x)\hat\gamma$ is sup-norm consistent and therefore, thanks to the overlap assumption, $\hat{e}(X)$ is also sup-norm consistent.*
   
-  From here I follow the proof in Wager's script. I will focus on an estimator for $\theta_1=E[Y(1)]$. Extending this proof to the ATE estimator is straight forward since $\theta=\theta_1 - \theta_0$. First, if we would know the true functions $\mu_1(X)$ and $e(X)$, the oracle estimator:
+  *From here I follow the proof in Wager's script. I will focus on an estimator for $\theta_1=E[Y(1)]$. Extending this proof to the ATE estimator is straight forward since $\theta=\theta_1 - \theta_0$. First, if we would know the true functions $\mu_1(X)$ and $e(X)$, the oracle estimator:*
   
   $$
   \widetilde\theta_1 = \frac{1}{N} \sum_{i=1}^N \left(\mu_1(X_i) + \frac{D_i(Y_i-\mu_1(X_i))}{e(X_i)}\right)
   $$
   
-  would simply be an average of independent random variables and by the central limit theorem we would have that $\sqrt{N}(\widetilde\theta_1 - \theta_1) \xrightarrow{d} \mathcal{N}(0, V^*)$. Next, if we can show that $\sqrt{N}(\widetilde\theta_1 - \hat\theta_1)=o_p(1)$, we can conclude that our estimator converges to the same distribution as the oracle estimator.
+  *would simply be an average of independent random variables and by the central limit theorem we would have that $\sqrt{N}(\widetilde\theta_1 - \theta_1) \xrightarrow{d} \mathcal{N}(0, V^*)$. Next, if we can show that $\sqrt{N}(\widetilde\theta_1 - \hat\theta_1)=o_p(1)$, we can conclude that our estimator converges to the same distribution as the oracle estimator.*
   
-  Since I use cross-fitting for the estimation, I can rewrite the estimator as follows:
+  *Since I use cross-fitting for the estimation, I can rewrite the estimator as follows:*
   
   $$
   \hat\theta_1 = \frac{|\mathcal{I}_1|}{N} \hat\theta_1^{\mathcal{I}_1} + \frac{|\mathcal{I}_2|}{N} \hat\theta_1^{\mathcal{I}_2}, \qquad \hat\theta_1^{\mathcal{I}_1} = \frac{1}{|\mathcal{I}_1|} \sum_{i \in \mathcal{I}_1} \left(\hat{\mu}_1^{\mathcal{I}_2^S}(X_i) + \frac{D_i(Y_i-\hat{\mu}^{\mathcal{I}_2^S}_1(X_i))}{\hat{e}^{\mathcal{I}_2^S}(X_i)}\right).
   $$
   
-  So it is sufficient to show that $\sqrt{N}(\widetilde\theta_1^{\mathcal{I}_1} - \hat\theta_1^{\mathcal{I}_1})=o_p(1)$. Stefan wager shows how we can decompose the difference into three terms:
+  *So it is sufficient to show that $\sqrt{N}(\widetilde\theta_1^{\mathcal{I}_1} - \hat\theta_1^{\mathcal{I}_1})=o_p(1)$. Stefan wager shows how we can decompose the difference into three terms:*
   
   $$
   \begin{aligned}
@@ -267,7 +267,7 @@ So which estimator should we use in practice when dealing with unbalanced treatm
   \end{aligned}
   $$
   
-  We therefore have to show that each of these three components converge to zero at rate $N^{-1/2}$. First, (A) does not dependent on the estimation of the propensity score, and we can therefore use the same argument as in Stefan Wager's script, which is why I will skip this part of the proof. Second, I compute the squared $L_2$-norm of (B):
+  *We therefore have to show that each of these three components converge to zero at rate $N^{-1/2}$. First, (A) does not dependent on the estimation of the propensity score, and we can therefore use the same argument as in Stefan Wager's script, which is why I will skip this part of the proof. Second, I compute the squared $L_2$-norm of (B):*
   
   $$
   \begin{aligned}
@@ -282,7 +282,7 @@ So which estimator should we use in practice when dealing with unbalanced treatm
   \end{aligned}
   $$
   
-  I skipped the last steps since, thanks to the sup-consistency of the calibrated propensity score estimator, they coincide with the proof of the double-robust estimator. The main difference to the usual proof is the fact that I had to condition not only on the (undersampled) estimation sample, but also on the treatment assignments of the entire sample $\{D_i\}_{i=1,\dots, N}$. This step is necessary, since the calibrated propensity score depends on $\hat\gamma$ which is estimated over the entire sample. Despite this, the elements in the sum are still uncorrelated (forth equality):
+  *I skipped the last steps since, thanks to the sup-consistency of the calibrated propensity score estimator, they coincide with the proof of the double-robust estimator. The main difference to the usual proof is the fact that I had to condition not only on the (undersampled) estimation sample, but also on the treatment assignments of the entire sample $\{D_i\}_{i=1,\dots, N}$. This step is necessary, since the calibrated propensity score depends on $\hat\gamma$ which is estimated over the entire sample. Despite this, the elements in the sum are still uncorrelated (forth equality):*
   
 $$
   \begin{aligned}
@@ -294,8 +294,8 @@ $$
   $$
   
   
-  by the law of iterated expectations and the fact that the observations are independent.
-  Lastly, we can focus on the (C):
+  *by the law of iterated expectations and the fact that the observations are independent.
+  Lastly, we can focus on the (C):*
   
   $$
   \begin{aligned}
@@ -316,7 +316,7 @@ $$
     \end{aligned}
   $$
   
-  where the first the first term in the last step is $o(N^{-1/2})$ by the risk-decay assumption and the second term is $o(N^{-1/2})$ by the convergence rate of $\hat\gamma$ and sup-consistency of $\hat\mu_1$. The positive constants $c_1$ and $c_2$ come from the boundedness of $e_S$ and $\gamma$ (and that of their respective estimators). Combined with the law of large numbers, we can conclude that the term (C) is $o_p(N^{-1/2})$. This concludes the proof of the theorem as all three terms (A), (B) and (C) are $o_p(N^{-1/2})$.
+  *where the first the first term in the last step is $o(N^{-1/2})$ by the risk-decay assumption and the second term is $o(N^{-1/2})$ by the convergence rate of $\hat\gamma$ and sup-consistency of $\hat\mu_1$. The positive constants $c_1$ and $c_2$ come from the boundedness of $e_S$ and $\gamma$ (and that of their respective estimators). Combined with the law of large numbers, we can conclude that the term (C) is $o_p(N^{-1/2})$. This concludes the proof of the theorem as all three terms (A), (B) and (C) are $o_p(N^{-1/2})$.*
 
 ## References
 
