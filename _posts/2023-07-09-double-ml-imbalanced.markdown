@@ -30,27 +30,35 @@ In many fields we are interested in measuring the expected effect that a specifi
 The estimation of this quantity is not trivial. In fact, we generally do not observe both potential outcomes for the same subject. Moreover, in many situations we do not have data from a controlled experiment. In order to estimate the ATE, we need to make four assumptions. The first one is the stable unit treatment value assumption (SUTVA), which states that the potential outcome of a subject does not depend on the treatment assignment of other subjects. The second assumption that we need to make is the unconfoundedness assumption. Under this assumption, the treatment assignment is as good as random, conditional on the covariates (i.e. a set of observable characteristics). Third, we need to assume that the treatment assignment is not deterministic. And finally, we assume that the treatment assignment does not affect the covariates (exogenity assumption).
 
 Under these assumptions, we can estimate the ATE using the following formula:
+
 $$
 \theta = E[Y(1)-Y(0)] = E[\mu_1(X)-\mu_0(X) + \frac{D(Y-\mu_1(X))}{e(X)} - \frac{(1-D)(Y-\mu_0(X))}{1-e(X)}]
 $$
+
 where $e(X)$ is the probability of being treated (propensity score) and $\mu_{(d)}(X)=E[Y|X, D=d]$. The right-hand side of the equation is called the augmented inverse probability weighting (AIPW) estimator or double-robust estimator. Ideally we would like to estimate the nuisance functions $\mu_1(X)$, $\mu_0(X)$ and $e(X)$ using modern machine learning methods while still have a consistent and asymptotically normally distributed estimator. With two crucial ingredients, this is indeed possible. First, the following conditions need to be satisfied[^1]:
 - Overlap: $\eta < e(x) < 1-\eta$ for $\eta>0$ and for all $x \in \mathcal{X}$.
 - Consistency: the machine learning methods are sup-norm consistent
+
 $$
 \sup_{x \in \mathcal{X}} |\hat{\mu}_d(x) - \mu_d(x)| \xrightarrow{p} 0 \quad \text{and} \quad \sup_{x \in \mathcal{X}} |\hat{e}(x) - e(x)| \xrightarrow{p} 0
 $$
+
 - Risk decay: the machine learning methods have a risk decay rate that satisfies
+
 $$
 E\left[\left(\hat{\mu}_d(X) - \mu_d(X)\right)^2\right] E\left[\left(\hat{e}(X) - e(X)\right)^2\right] = o(n^{-1})
 $$
+
 Second, we estimate the ATE using a so-called cross-fitting approach: we split the data randomly into two folds, $\mathcal{I}_1$ and $\mathcal{I}_2$. We then train the machine learning models on $\mathcal{I}_1$ and use them to compute the following quantity on the other fold $\mathcal{I}_2$:
 $$
 \hat{\tau}_i = \hat{\mu}_1(X_i) - \hat{\mu}_0(X_i) + \frac{D_i(Y_i-\hat{\mu}_1(X_i))}{\hat{e}(X_i)} - \frac{(1-D_i)(Y_i-\hat{\mu}_0(X_i))}{1-\hat{e}(X_i)}.
 $$
 We then repeat the same procedure flipping the folds. We obtain the final estimate of the ATE by averaging the $\hat{\tau}_i$:
+
 $$
 \hat{\theta} = \frac{1}{N} \sum_{i=1}^N \hat{\tau}_i
 $$
+
 In practice, we can use more than two folds, and extend this procedure to $K$ folds.
 
 For a good explanation of the proof of why this estimation approach is in fact consistent and asymptotically normally distributed, I recommend the lecture notes of Stefan Wager's course "STATS 361: Causal Inference"[^1]. For a more technical explanation, you can directly refer to the paper on double-debiased machine learning by Chernozhukov et al. (2018).[^2]
@@ -58,9 +66,11 @@ For a good explanation of the proof of why this estimation approach is in fact c
 ## Unbalanced treatment assignment
 
 In many real-world applications, the treatment assignment is not balanced. This means that only very few subjects are treated. This problem arises, for example, in medical applications where the treatment assignment might be very expensive. In this case, the machine learning model will have a hard time to correctly estimate the propensity scores $e(X)$. In fact, the more extreme the unbalancedness, the more the model will tend to predict a probability of being treated close to zero for all subjects. This is because the model will try to minimize the loss function, which will be dominated by the non-treated subjects. Since the propensity scores appear in the denominator of the doubly-robust estimator, we will obtain very large values for the term:
+
 $$
 \frac{D_i(Y_i-\hat{\mu}_1(X_i))}{\hat{e}(X_i)}.
 $$
+
 This will lead to a very high variance of the ATE estimator and in finite-samples to a considerable bias.
 
 Luckily, this is a well known issue in machine learning classification problems. A common approach to address this issue is _undersampling_. This means that we will randomly select a subset of the non-treated subjects and use this subset to train the machine learning models and estimate the treatment effect. This will lead to a more balanced dataset. However, undersampling the data results in effectively using less data to estimate $\mu_0(X)$, $e(X)$, and most importantly $\theta$.
@@ -68,6 +78,7 @@ Luckily, this is a well known issue in machine learning classification problems.
 Here I will explore an alternative approach which only partially undersamples the dataset. This approach is based on the idea that we can undersample only the data used to estimate the machine learning models, while still using all the data to estimate the treatment effect. This requires however an adjustment of the propensity scores. In what follows, I will describe the adjustment proposed by Dal Pozzolo et al. (2015).[^3] While they apply their method to the problem of unbalanced classification, it can be easily adapted to the problem of estimating propensity scores.
 
 To formalize the concept of undersampling, we can define a random variable $S_i$ which equals 1 if the observation is part of the undersampled data and 0 otherwise. It then follows that $P(S_i=1|D_i=1)=1$ since we keep all treated observations. For the non-treated once, we instead have $P(S_i = 1 | D_i=0) = \gamma < 1$. Notice that since the undersampling technique is not dependent on the covariates $X$, we have $P(S_i=1|D_i=d, X_i)=P(S_i=1|D_i=d)$. So how does undersampling affect the propensity score? This can be easily derived using Bayes' rule:
+
 $$
 \begin{aligned}
 e_S(X_i) &:= P(D_i=1|X_i, S_i=1)\\[0.5cm] &= \frac{P(S_i=1|D_i=1, X_i)P(D_i=1|X_i)}{P(S_i=1|D_i=1, X_i)P(D_i=1|X_i) + P(S_i=1|D_i=0, X_i)P(D_i=0|X_i)}\\[0.5cm]
@@ -80,11 +91,13 @@ $$
 So when we are using an undersampled dataset to estimate the propensity score, we are in fact not estimating the population propensity score $e(X_i)$, but the propensity score of a balanced dataset $e_S(X_i)$. This is also the reason why we have to estimate the treatment effect on the undersampled dataset: the machine learner will be sup-consistent for the propensity score on the undersampled population.
 
 Fortunately, the above formula does not only show that $e_S(X_i) \neq e(X_i)$, but also directly suggests an adjustment of the estimated propensity score to recover the population propensity score:
+
 $$
 e(X_i) = \frac{\gamma e_S(X_i)}{\gamma e_S(X_i) + 1-e_S(X_i)}.
 $$
 
 The propensity score $e(X_i)$ can therefore be estimated by plugging in the estimated propensity score $e_S(X_i)$ from the undersampled dataset and an estimate of $\gamma$:
+
 $$
 \hat\gamma = \frac{\sum_{i=1}^N D_i}{\sum_{i=1}^N 1-D_i}.
 $$
@@ -99,11 +112,14 @@ Notice that here we can estimated $\gamma$ using the entire dataset, and not a c
 > 5. Calibrated the propensity score: 
 > $$\hat{e}(X_i) = \frac{\hat\gamma \hat{e}_S(X_i)}{\hat\gamma \hat{e}_S(X_i) + 1-\hat{e}_S(X_i)}$$
 > 6. Compute the following quantity on the other fold $\mathcal{I}_2$:
+> 
 > $$
 \hat{\tau}_i = \hat{\mu}_1(X_i) - \hat{\mu}_0(X_i) + \frac{D_i(Y_i-\hat{\mu}_1(X_i))}{\hat{e}(X_i)} - \frac{(1-D_i)(Y_i-\hat{\mu}_0(X_i))}{1-\hat{e}(X_i)}.
 > $$
+> 
 > 7. Repeat the same procedure flipping the folds.
 > 8. Obtain the final estimate of the ATE by averaging the $\hat{\tau}_i$:
+> 
 > $$
 \hat{\theta} = \frac{1}{N} \sum_{i=1}^N \hat{\tau}_i
 > $$
@@ -118,24 +134,31 @@ Notice that here we can estimated $\gamma$ using the entire dataset, and not a c
   > I will assume that the previously mentioned conditions hold for the undersampled machine learner:
   >- Overlap: $\eta < e_S(x) < 1-\eta$ for $\eta>0$ and for all $x \in \mathcal{X}$.
   >- Consistency:
+  >
   >$$
     \sup_{x \in \mathcal{X}} |\hat{e}_S(x) - e_S(x)| \xrightarrow{p} 0
   >$$
+> 
   >- Risk decay:
   >$$
     E\left[\left(\hat{\mu}_d(X) - \mu_d(X)\right)^2\right] E\left[\left(\hat{e}_S(x) - e_S(X)\right)^2\right] = o(n^{-1}).
   >$$
-  > Now by noticing that
+  >
+> Now by noticing that
+> 
   > $$
   |\hat{e}_S(x)\hat\gamma - e_S(X)\gamma| = |\hat{e}_S(x)\hat\gamma - e_S(X)\hat\gamma + e_S(X)\hat\gamma - e_S(X)\gamma| \leq |\hat{e}_S(x) - e_S(X)| |\hat\gamma| + |\hat\gamma - \gamma| |e_S(X)| \leq |\hat{e}_S(x) - e_S(X)| + |\hat\gamma - \gamma| 
   > $$
-  > we can conclude that $\hat{e}_S(x)\hat\gamma$ is sup-norm consistent and therefore, thanks to the overlap assumption, $\hat{e}(X)$ is also sup-norm consistent.
+  >
+> we can conclude that $\hat{e}_S(x)\hat\gamma$ is sup-norm consistent and therefore, thanks to the overlap assumption, $\hat{e}(X)$ is also sup-norm consistent.
   >
   > From here I follow the proof in Wager's script. I will focus on an estimator for $\theta_1=E[Y(1)]$. Extending this proof to the ATE estimator is straight forward since $\theta=\theta_1 - \theta_0$. First, if we would know the true functions $\mu_1(X)$ and $e(X)$, the oracle estimator:
+  >
   >$$
   \widetilde\theta_1 = \frac{1}{N} \sum_{i=1}^N \left(\mu_1(X_i) + \frac{D_i(Y_i-\mu_1(X_i))}{e(X_i)}\right)
   >$$
-  >would simply be an average of independent random variables and by the central limit theorem we would have that $\sqrt{N}(\widetilde\theta_1 - \theta_1) \xrightarrow{d} \mathcal{N}(0, V^*)$. Next, if we can show that $\sqrt{N}(\widetilde\theta_1 - \hat\theta_1)=o_p(1)$, we can conclude that our estimator converges to the same distribution as the oracle estimator.
+  >
+> would simply be an average of independent random variables and by the central limit theorem we would have that $\sqrt{N}(\widetilde\theta_1 - \theta_1) \xrightarrow{d} \mathcal{N}(0, V^*)$. Next, if we can show that $\sqrt{N}(\widetilde\theta_1 - \hat\theta_1)=o_p(1)$, we can conclude that our estimator converges to the same distribution as the oracle estimator.
   >
   > Since I use cross-fitting for the estimation, I can rewrite the estimator as follows:
   > $$
