@@ -2,7 +2,7 @@
 title: "Double-debiased machine learning with unbalanced treatment assignment"
 layout: post
 date: 2023-08-02 22:48
-image: /assets/images/markdown.jpg
+image: /assets/images/causal_graph.webp
 headerImage: false
 tag:
 - causal-ml
