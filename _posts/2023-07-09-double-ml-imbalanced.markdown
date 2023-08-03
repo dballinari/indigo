@@ -132,11 +132,31 @@ Notice that here we can estimated $\gamma$ using the entire dataset, and not a c
 <details>
   <summary>Proof of the asymptotic properties</summary>
   
-  > The proof of the asymptotic properties of the UC-DR estimator is very similar to the proof of the classical doubly-robust estimator as outlined in Stefan Wager's script[^1]. In the following I will therefore only cover the differences in the proofs to try to keep this part as short as possible.
-  > 
-  > Notice that estimator of $\gamma$ is simply a maximum likelihood estimator for which we have that $|\hat\gamma - \gamma|= o_p(n^{-1/2})$. Moreover, I assume that $\epsilon < \gamma < 1 - \epsilon$ for $\epsilon>0$. 
+      The proof of the asymptotic properties of the UC-DR estimator is very similar to the proof of the classical doubly-robust estimator as outlined in Stefan Wager's script[^1]. In the following I will therefore only cover the differences in the proofs to try to keep this part as short as possible.
+       
+      Notice that estimator of $\gamma$ is simply a maximum likelihood estimator for which we have that $|\hat\gamma - \gamma|= o_p(n^{-1/2})$. Moreover, I assume that $\epsilon < \gamma < 1 - \epsilon$ for $\epsilon>0$.
+    
+      I will assume that the previously mentioned conditions hold for the undersampled machine learner:
+      - Overlap: $\eta < e_S(x) < 1-\eta$ for $\eta>0$ and for all $x \in \mathcal{X}$.
+      - Consistency:
+      
+      $$
+        \sup_{x \in \mathcal{X}} |\hat{e}_S(x) - e_S(x)| \xrightarrow{p} 0
+      $$
+      
+      - Risk decay:
+      $$
+        E\left[\left(\hat{\mu}_d(X) - \mu_d(X)\right)^2\right] E\left[\left(\hat{e}_S(x) - e_S(X)\right)^2\right] = o(n^{-1}).
+      $$
+      
+      Now by noticing that
+      
+      $$
+      |\hat{e}_S(x)\hat\gamma - e_S(X)\gamma| = |\hat{e}_S(x)\hat\gamma - e_S(X)\hat\gamma + e_S(X)\hat\gamma - e_S(X)\gamma| \leq |\hat{e}_S(x) - e_S(X)| |\hat\gamma| + |\hat\gamma - \gamma| |e_S(X)| \leq |\hat{e}_S(x) - e_S(X)| + |\hat\gamma - \gamma| 
+      $$
   
-
+     we can conclude that $\hat{e}_S(x)\hat\gamma$ is sup-norm consistent and therefore, thanks to the overlap assumption, $\hat{e}(X)$ is also sup-norm consistent.
+  
 </details>
 
 ## A small simulation study
