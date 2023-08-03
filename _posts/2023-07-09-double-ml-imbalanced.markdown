@@ -129,6 +129,7 @@ Notice that here we can estimated $\gamma$ using the entire dataset, and not a c
 \hat{\theta} = \frac{1}{N} \sum_{i=1}^N \hat{\tau}_i
 > $$
 
+You can find a proof of the asymptotic normality of this estimator [at the end](Proof-of-the-asymptotic-properties) of this post.
 
 
 ## A small simulation study
