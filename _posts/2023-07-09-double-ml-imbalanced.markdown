@@ -210,22 +210,12 @@ The baseline DR estimator, although widely used, faces challenges when the sampl
 So which estimator should we use in practice when dealing with unbalanced treatment assignment? As in many cases: it depends. If the sample is small and highly unbalanced, undersampling is a good choice. If the sample is large I would recommend to undersample only the data used to train the machine learning models and then adjust the propensity score predictions. This will allow to use more data to estimate the ATE or to train other models on the $\hat\tau_i$. This could be particularly useful when we are interested in conditional treatment effects or in solving a policy learning problem. In any case, the baseline doubly-robust estimator should be avoided in highly unbalanced samples, unless we have a very large sample size.
 
 
-
-[^1]: Stefan Wager (2020), STATS 361: Causal Inference, Retrieved from [Wager's webpage](https://web.stanford.edu/~swager/teaching.html).
-
-[^2]: Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen, C., Newey, W. and Robins, J. (2018), Double/debiased machine learning for treatment and structural parameters. _The Econometrics Journal_, 21: C1-C68. [doi:10.1111/ectj.12097](https://doi.org/10.1111/ectj.12097).
-
-[^3]: A. D. Pozzolo, O. Caelen, R. A. Johnson and G. Bontempi (2015), Calibrating Probability with Undersampling for Unbalanced Classification. _IEEE Symposium Series on Computational Intelligence_, pp. 159-166, [doi: 10.1109/SSCI.2015.33](https://doi.org/10.1109/SSCI.2015.33).
-
-[^4]: G. Okasa (2022), Meta-Learners for Estimation of Causal Effects: Finite Sample Cross-Fit Performance. _arXiv working paper_, [arXiv:2201.12692v1](https://doi.org/10.48550/arXiv.2201.12692)
-
-[^5]: Athey, S. and Wager, S. (2021), Policy Learning With Observational Data. Econometrica, 89: 133-161. [https://doi.org/10.3982/ECTA15732](https://doi.org/10.3982/ECTA15732)
-
-##  Proof of the asymptotic properties of the undersampled-calibrated doubly-robust estimator
+## Proof of the asymptotic properties
 
   The proof of the asymptotic properties of the UC-DR estimator is very similar to the proof of the classical doubly-robust estimator as outlined in Stefan Wager's script[^1]. In the following I will therefore only cover the differences in the proofs to try to keep this part as short as possible.
  
-  Notice that estimator of $\gamma$ is simply a maximum likelihood estimator for which we have that $|\hat\gamma - \gamma|= o_p(n^{-1/2})$. Moreover, I assume that $\epsilon < \gamma < 1 - \epsilon$ for $\epsilon>0$. 
+  Notice that the estimator of $\gamma$ is simply a maximum likelihood estimator for which we have that $|\hat\gamma - \gamma|= o_p(n^{-1/2})$. 
+  Moreover, I assume that $\epsilon < \gamma < 1 - \epsilon$ for $\epsilon>0$. 
 
   I will assume that the previously mentioned conditions hold for the undersampled machine learner:
   - Overlap: $\eta < e_S(x) < 1-\eta$ for $\eta>0$ and for all $x \in \mathcal{X}$.
@@ -326,3 +316,15 @@ $$
   $$
   
   where the first the first term in the last step is $o(N^{-1/2})$ by the risk-decay assumption and the second term is $o(N^{-1/2})$ by the convergence rate of $\hat\gamma$ and sup-consistency of $\hat\mu_1$. The positive constants $c_1$ and $c_2$ come from the boundedness of $e_S$ and $\gamma$ (and that of their respective estimators). Combined with the law of large numbers, we can conclude that the term (C) is $o_p(N^{-1/2})$. This concludes the proof of the theorem as all three terms (A), (B) and (C) are $o_p(N^{-1/2})$.
+
+## References
+
+[^1]: Stefan Wager (2020), STATS 361: Causal Inference, Retrieved from [Wager's webpage](https://web.stanford.edu/~swager/teaching.html).
+
+[^2]: Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen, C., Newey, W. and Robins, J. (2018), Double/debiased machine learning for treatment and structural parameters. _The Econometrics Journal_, 21: C1-C68. [doi:10.1111/ectj.12097](https://doi.org/10.1111/ectj.12097).
+
+[^3]: A. D. Pozzolo, O. Caelen, R. A. Johnson and G. Bontempi (2015), Calibrating Probability with Undersampling for Unbalanced Classification. _IEEE Symposium Series on Computational Intelligence_, pp. 159-166, [doi: 10.1109/SSCI.2015.33](https://doi.org/10.1109/SSCI.2015.33).
+
+[^4]: G. Okasa (2022), Meta-Learners for Estimation of Causal Effects: Finite Sample Cross-Fit Performance. _arXiv working paper_, [arXiv:2201.12692v1](https://doi.org/10.48550/arXiv.2201.12692)
+
+[^5]: Athey, S. and Wager, S. (2021), Policy Learning With Observational Data. Econometrica, 89: 133-161. [https://doi.org/10.3982/ECTA15732](https://doi.org/10.3982/ECTA15732)
