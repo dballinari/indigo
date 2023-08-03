@@ -5,7 +5,7 @@ date: 2023-08-03 12:00
 image: /assets/images/markdown.jpg
 headerImage: false
 tag:
-- Undersampling
+- undersampling
 star: false
 category: blog
 author: danieleballinari
