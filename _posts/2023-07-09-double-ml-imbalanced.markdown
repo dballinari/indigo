@@ -211,7 +211,7 @@ The baseline DR estimator, although widely used, faces challenges when the sampl
 So which estimator should we use in practice when dealing with unbalanced treatment assignment? As in many cases: it depends. If the sample is small and highly unbalanced, undersampling is a good choice. If the sample is large I would recommend to undersample only the data used to train the machine learning models and then adjust the propensity score predictions. This will allow to use more data to estimate the ATE or to train other models on the $\hat\tau_i$. This could be particularly useful when we are interested in conditional treatment effects or in solving a policy learning problem. In any case, the baseline doubly-robust estimator should be avoided in highly unbalanced samples, unless we have a very large sample size.
 
 
-## Proof of the asymptotic properties
+## *Proof of the asymptotic properties*
 
   *The proof of the asymptotic properties of the UC-DR estimator is very similar to the proof of the classical doubly-robust estimator as outlined in Stefan Wager's script[^1]. In the following I will therefore only cover the differences in the proofs to try to keep this part as short as possible.*
  
@@ -243,13 +243,16 @@ So which estimator should we use in practice when dealing with unbalanced treatm
   
   *we can conclude that $\hat{e}_S(x)\hat\gamma$ is sup-norm consistent and therefore, thanks to the overlap assumption, $\hat{e}(X)$ is also sup-norm consistent.*
   
-  *From here I follow the proof in Wager's script. I will focus on an estimator for $\theta_1=E[Y(1)]$. Extending this proof to the ATE estimator is straight forward since $\theta=\theta_1 - \theta_0$. First, if we would know the true functions $\mu_1(X)$ and $e(X)$, the oracle estimator:*
+  *From here I follow the proof in Wager's script. I will focus on an estimator for $\theta_1=E[Y(1)]$.* 
+  *Extending this proof to the ATE estimator is straight forward since $\theta=\theta_1 - \theta_0$.* 
+  *First, if we would know the true functions $\mu_1(X)$ and $e(X)$, the oracle estimator:*
   
   $$
   \widetilde\theta_1 = \frac{1}{N} \sum_{i=1}^N \left(\mu_1(X_i) + \frac{D_i(Y_i-\mu_1(X_i))}{e(X_i)}\right)
   $$
   
-  *would simply be an average of independent random variables and by the central limit theorem we would have that $\sqrt{N}(\widetilde\theta_1 - \theta_1) \xrightarrow{d} \mathcal{N}(0, V^*)$. Next, if we can show that $\sqrt{N}(\widetilde\theta_1 - \hat\theta_1)=o_p(1)$, we can conclude that our estimator converges to the same distribution as the oracle estimator.*
+  *would simply be an average of independent random variables and by the central limit theorem we would have that $\sqrt{N}(\widetilde\theta_1 - \theta_1) \xrightarrow{d} \mathcal{N}(0, V^*)$.*
+  *Next, if we can show that $\sqrt{N}(\widetilde\theta_1 - \hat\theta_1)=o_p(1)$, we can conclude that our estimator converges to the same distribution as the oracle estimator.*
   
   *Since I use cross-fitting for the estimation, I can rewrite the estimator as follows:*
   
@@ -257,7 +260,8 @@ So which estimator should we use in practice when dealing with unbalanced treatm
   \hat\theta_1 = \frac{|\mathcal{I}_1|}{N} \hat\theta_1^{\mathcal{I}_1} + \frac{|\mathcal{I}_2|}{N} \hat\theta_1^{\mathcal{I}_2}, \qquad \hat\theta_1^{\mathcal{I}_1} = \frac{1}{|\mathcal{I}_1|} \sum_{i \in \mathcal{I}_1} \left(\hat{\mu}_1^{\mathcal{I}_2^S}(X_i) + \frac{D_i(Y_i-\hat{\mu}^{\mathcal{I}_2^S}_1(X_i))}{\hat{e}^{\mathcal{I}_2^S}(X_i)}\right).
   $$
   
-  *So it is sufficient to show that $\sqrt{N}(\widetilde\theta_1^{\mathcal{I}_1} - \hat\theta_1^{\mathcal{I}_1})=o_p(1)$. Stefan wager shows how we can decompose the difference into three terms:*
+  *So it is sufficient to show that $\sqrt{N}(\widetilde\theta_1^{\mathcal{I}_1} - \hat\theta_1^{\mathcal{I}_1})=o_p(1)$.*
+  *Stefan wager shows how we can decompose the difference into three terms:*
   
   $$
   \begin{aligned}
