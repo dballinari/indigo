@@ -115,10 +115,10 @@ Notice that here we can estimated $\gamma$ using the entire dataset, and not a c
 > 2. Split the data randomly into two folds, $\mathcal{I}_1$ and $\mathcal{I}_2$
 > 3. Undersample $\mathcal{I}_1$ to obtain a balanced sample $\mathcal{I}_1^S$
 > 4. Train the machine learning models on $\mathcal{I}_1^S$ to obtain $\hat{\mu}_0$, $\hat{\mu}_1$ and $\hat{e}_S$.
-> 5. Calibrated the propensity score:
-> \begin{equation*}
+> 5. Calibrated the propensity score:\
+> $$
 > \hat{e}(X_i) = \frac{\hat\gamma \hat{e}_S(X_i)}{\hat\gamma \hat{e}_S(X_i) + 1-\hat{e}_S(X_i)}
-> \end{equation*}
+> $$
 > 7. Compute the following quantity on the other fold $\mathcal{I}_2$:
 > 
 > $$
@@ -261,7 +261,7 @@ As the number of observations increases, the UC-DR estimator outperforms the U-D
 The baseline DR estimator, although widely used, faces challenges when the sample is highly unbalanced. In such cases, the propensity score predictions approach zero for some observations, leading to considerable outliers and severely biased causal effect estimates. This can result in misleading conclusions and limit the applicability of the baseline DR estimator in practical situations involving imbalanced datasets. Only for the largest and least unbalanced sample, the baseline DR estimator performs well.
 
 
-| Estimator | Double-robust | Undersampled DR | Undersampled-calibrated  DR |
+| Estimator | DR | U-DR | UC-DR |
 |-----------------|:-------------|:---------------:|:---------------:|
 |_2% treated, N = 1'000, 1'000 simulations_ |
 | Bias | 829'573.92  | **0.1321**    | 0.1346 |
