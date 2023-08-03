@@ -1,7 +1,7 @@
 ---
-title: "Markdown Extra Components"
+title: "Double-debiased machine learning with unbalanced treatment assignment"
 layout: post
-date: 2016-02-24 22:48
+date: 2023-08-02 22:48
 image: /assets/images/markdown.jpg
 headerImage: false
 tag:
