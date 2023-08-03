@@ -5,9 +5,9 @@ date: 2023-08-02 22:48
 image: /assets/images/markdown.jpg
 headerImage: false
 tag:
-- markdown
-- components
-- extra
+- causal-ml
+- undersampling
+- ate
 category: blog
 author: danieleballinari
 description: Markdown summary with different options
