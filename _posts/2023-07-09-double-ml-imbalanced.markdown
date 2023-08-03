@@ -32,7 +32,7 @@ The estimation of this quantity is not trivial. In fact, we generally do not obs
 Under these assumptions, we can estimate the ATE using the following formula:
 
 $$
-\theta = E[Y(1)-Y(0)] = E[\mu_1(X)-\mu_0(X) + \frac{D(Y-\mu_1(X))}{e(X)} - \frac{(1-D)(Y-\mu_0(X))}{1-e(X)}]
+\theta = E[Y(1)-Y(0)] = E\left[\mu_1(X)-\mu_0(X) + \frac{D(Y-\mu_1(X))}{e(X)} - \frac{(1-D)(Y-\mu_0(X))}{1-e(X)}\right]
 $$
 
 where $e(X)$ is the probability of being treated (propensity score) and $\mu_{(d)}(X)=E[Y|X, D=d]$. The right-hand side of the equation is called the augmented inverse probability weighting (AIPW) estimator or double-robust estimator. Ideally we would like to estimate the nuisance functions $\mu_1(X)$, $\mu_0(X)$ and $e(X)$ using modern machine learning methods while still have a consistent and asymptotically normally distributed estimator. With two crucial ingredients, this is indeed possible. First, the following conditions need to be satisfied[^1]:
