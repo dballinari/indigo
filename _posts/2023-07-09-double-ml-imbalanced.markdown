@@ -119,12 +119,10 @@ Notice that here we can estimated $\gamma$ using the entire dataset, and not a c
 > $$
 > \hat{e}(X_i) = \frac{\hat\gamma \hat{e}_S(X_i)}{\hat\gamma \hat{e}_S(X_i) + 1-\hat{e}_S(X_i)}
 > $$
-> 7. Compute the following quantity on the other fold $\mathcal{I}_2$:
-> 
+> 6. Compute the following quantity on the other fold $\mathcal{I}_2$:\\
 > $$
 \hat{\tau}_i = \hat{\mu}_1(X_i) - \hat{\mu}_0(X_i) + \frac{D_i(Y_i-\hat{\mu}_1(X_i))}{\hat{e}(X_i)} - \frac{(1-D_i)(Y_i-\hat{\mu}_0(X_i))}{1-\hat{e}(X_i)}.
 > $$
-> 
 > 7. Repeat the same procedure flipping the folds.
 > 8. Obtain the final estimate of the ATE by averaging the $\hat{\tau}_i$:
 > 
