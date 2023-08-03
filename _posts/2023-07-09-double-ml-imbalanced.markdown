@@ -202,14 +202,15 @@ Notice that here we can estimated $\gamma$ using the entire dataset, and not a c
   
   I skipped the last steps since, thanks to the sup-consistency of the calibrated propensity score estimator, they coincide with the proof of the double-robust estimator. The main difference to the usual proof is the fact that I had to condition not only on the (undersampled) estimation sample, but also on the treatment assignments of the entire sample $\{D_i\}_{i=1,\dots, N}$. This step is necessary, since the calibrated propensity score depends on $\hat\gamma$ which is estimated over the entire sample. Despite this, the elements in the sum are still uncorrelated (forth equality):
   
-  $$
+$$
   \begin{aligned}
-  Cov\left[D_i & \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right), D_j  \left( Y_j - \mu_1(X_j) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_j)}-\frac{1}{e(X_j)}\right) \Bigg|\mathcal{I}_2^S, D_1, \dots, D_N \right] \\
-  = E\left[& D_i  \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) D_j  \left( Y_j - \mu_1(X_j) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_j)}-\frac{1}{e(X_j)}\right) \Bigg|\mathcal{I}_2^S, D_1, \dots, D_N \right] \\
-  = E\left[& D_i \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) D_j   \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_j)}-\frac{1}{e(X_j)}\right)\\ 
-   & \cdot E\left[ \left( Y_i - \mu_1(X_i) \right) \Big|X_i, D_i \right] E\left[ \left( Y_j - \mu_1(X_j) \right) \Big|X_j, D_j \right] \Bigg|\mathcal{I}_2^S, D_1, \dots, D_N \right] = 0
+  Cov\Bigg[& D_i \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right), D_j  \left( Y_j - \mu_1(X_j) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_j)}-\frac{1}{e(X_j)}\right) \Bigg|\mathcal{I}_2^S, D_1, \dots, D_N \Bigg] \\
+  = E\Bigg[& D_i  \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) D_j  \left( Y_j - \mu_1(X_j) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_j)}-\frac{1}{e(X_j)}\right) \Bigg|\mathcal{I}_2^S, D_1, \dots, D_N \Bigg] \\
+  = E\Bigg[& D_i \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) D_j   \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_j)}-\frac{1}{e(X_j)}\right)\\ 
+   & \cdot E\left[ \left( Y_i - \mu_1(X_i) \right) \Big|X_i, D_i \right] E\left[ \left( Y_j - \mu_1(X_j) \right) \Big|X_j, D_j \right] \Bigg|\mathcal{I}_2^S, D_1, \dots, D_N \Bigg] = 0
   \end{aligned}
   $$
+  
   
   by the law of iterated expectations and the fact that the observations are independent.
   Lastly, we can focus on the (C):
