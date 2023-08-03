@@ -257,7 +257,8 @@ As the number of observations increases, the UC-DR estimator outperforms the U-D
 3. **Limitations of baseline DR estimator in highly unbalanced samples:**
 The baseline DR estimator, although widely used, faces challenges when the sample is highly unbalanced. In such cases, the propensity score predictions approach zero for some observations, leading to considerable outliers and severely biased causal effect estimates. This can result in misleading conclusions and limit the applicability of the baseline DR estimator in practical situations involving imbalanced datasets. Only for the largest and least unbalanced sample, the baseline DR estimator performs well.
 
-
+<center>
+    
 |  | DR &nbsp; | U-DR &nbsp; | UC-DR &nbsp; |
 | :----------------- | --------------------------: | --------------------------: | --------------------------: |
 |_2% treated, N = 1'000, 1'000 simulations_ |
@@ -276,6 +277,8 @@ The baseline DR estimator, although widely used, faces challenges when the sampl
 | Bias | **0.0124**  | 0.0613      | 0.0147 |
 | RMSE    | **0.0371**      | 0.0491      | 0.0578 |
 | Regret    | 0.3790      | 0.4039      | **0.3752** |
+
+</center>
 
 ## Conclusion
 
