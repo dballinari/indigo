@@ -50,9 +50,11 @@ E\left[\left(\hat{\mu}_d(X) - \mu_d(X)\right)^2\right] E\left[\left(\hat{e}(X) -
 $$
 
 Second, we estimate the ATE using a so-called cross-fitting approach: we split the data randomly into two folds, $\mathcal{I}_1$ and $\mathcal{I}_2$. We then train the machine learning models on $\mathcal{I}_1$ and use them to compute the following quantity on the other fold $\mathcal{I}_2$:
+
 $$
 \hat{\tau}_i = \hat{\mu}_1(X_i) - \hat{\mu}_0(X_i) + \frac{D_i(Y_i-\hat{\mu}_1(X_i))}{\hat{e}(X_i)} - \frac{(1-D_i)(Y_i-\hat{\mu}_0(X_i))}{1-\hat{e}(X_i)}.
 $$
+
 We then repeat the same procedure flipping the folds. We obtain the final estimate of the ATE by averaging the $\hat{\tau}_i$:
 
 $$
