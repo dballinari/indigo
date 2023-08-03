@@ -189,7 +189,8 @@ Notice that here we can estimated $\gamma$ using the entire dataset, and not a c
   
   $$
   \begin{aligned}
-  \left\|\frac{1}{|\mathcal{I}_1|} \sum_{i \in \mathcal{I}_1} D_i \left( \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) \right)\right\|_2^2 &= E\left[ \left(\frac{1}{|\mathcal{I}_1|} \sum_{i \in \mathcal{I}_1} D_i  \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) \right)^2 \right]\\
+  &\left\|\frac{1}{|\mathcal{I}_1|} \sum_{i \in \mathcal{I}_1} D_i \left( \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) \right)\right\|_2^2\\ 
+  &= E\left[ \left(\frac{1}{|\mathcal{I}_1|} \sum_{i \in \mathcal{I}_1} D_i  \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) \right)^2 \right]\\
   &= E\left[ E\left[  \left(\frac{1}{|\mathcal{I}_1|} \sum_{i \in \mathcal{I}_1} D_i  \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) \right)^2 \Bigg|\mathcal{I}_2^S, D_1, \dots, D_N  \right] \right]\\
   &= E\left[ Var\left[  \frac{1}{|\mathcal{I}_1|} \sum_{i \in \mathcal{I}_1} D_i  \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right)  \Bigg|\mathcal{I}_2^S, D_1, \dots, D_N  \right] \right]\\
   &= \frac{1}{|\mathcal{I}_1|^2} E\left[  \sum_{i \in \mathcal{I}_1} Var\left[   D_i  \left( Y_i - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right)  \Bigg|\mathcal{I}_2^S, D_1, \dots, D_N  \right] \right]\\
@@ -212,7 +213,8 @@ Notice that here we can estimated $\gamma$ using the entire dataset, and not a c
   
   $$
   \begin{aligned}
-  E\left[ \left( \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) \right] & \leq E\left[ \left| \left( \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) \right| \right] \\
+  & E\left[ \left( \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) \right]\\ 
+  & \leq E\left[ \left| \left( \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \right) \left(\frac{1}{\hat{e}^{\mathcal{I}_2^S}(X_i)}-\frac{1}{e(X_i)}\right) \right| \right] \\
   & = E\left[ \left| \left( \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \right) \left(\frac{1}{\gamma e_S(X_i)} - \frac{1}{\hat\gamma \hat{e}^{\mathcal{I}_2^S}_S(X_i)} -\frac{1}{\gamma}+\frac{1}{\hat\gamma}\right) \right| \right]\\
   & \leq E\left[ \Bigg| \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \Bigg| \left| \left(\frac{1}{\gamma e_S(X_i)} - \frac{1}{\hat\gamma \hat{e}^{\mathcal{I}_2^S}_S(X_i)}\right) + \left(\frac{1}{\hat\gamma}-\frac{1}{\gamma} \right)\right| \right] \\
   & \leq E\left[ \Bigg| \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \Bigg| \left|\frac{1}{\gamma e_S(X_i)} - \frac{1}{\hat\gamma \hat{e}^{\mathcal{I}_2^S}_S(X_i)}\right| \right] + E\left[ \Bigg| \hat{\mu}_1^{\mathcal{I}_2^S}(X_i) - \mu_1(X_i) \Bigg| \left|\frac{1}{\hat\gamma}-\frac{1}{\gamma}\right| \right] \\
