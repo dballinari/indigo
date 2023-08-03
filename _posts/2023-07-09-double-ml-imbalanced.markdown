@@ -234,25 +234,34 @@ To better understand how the undersampling-calibrated doubly-robust estimator (U
 
 ### Data generating process
 The outcome variable is generated as follows:
+
 $$
 Y_i = Y_i(1) D_i + Y_i(0) (1-D_i)\\[0.5cm]
 $$
+
 with
+
 $$
 Y_i(1) = \mu_1(X_i) + \epsilon_i, \quad  \epsilon_i\sim \mathcal{N}(0,1)\\[0.5cm]
 Y_i(0) = \mu_0(X_i) + \epsilon_i, \quad  \epsilon_i\sim \mathcal{N}(0,1)\\[0.5cm]
 D_i = \mathbb{1}\{e(X_i) > U_i\}, \quad  U_i\sim \mathcal{U}(0,1).
 $$
+
 The features $X_i$ are a 100-dimensional vector drawn independently from a uniform distribution on $[0,1]$, that is $X_i \sim \mathcal{U}([0,1]^{100})$. The propensity score is given by:
+
 $$
 e(X_i) = k \cdot \left(1 + \beta_{2,4}(f(X_i)) \right)
 $$
+
 where $f(x) = \sin(\pi \cdot x_1 \cdot x_2 \cdot x_3 \cdot x_4)$ and $\beta_{2,4}$ is the beta cumulative distribution function with parameter 2 and 4. I set the parameter $k$ such that only either 2% or 12% of the observations are treated. Finally, I define the potential outcomes as follows:
+
 $$
 \mu_0(X_i) = \sin(\pi \cdot X_{i,1} \cdot X_{i,2}) + 2 \cdot (X_{i,3} - 0.5)^2 + 0.5 \cdot X_{i,4}\\[0.5cm]
 \mu_1(X_i) = \mu_0(X_{i}) + \eta(X_{i,1}) \cdot \eta(X_{i,2})\\[0.5cm]
 $$
+
 where the function $\eta(x)$ is defined as:
+
 $$
 \eta(x) = 1 + \frac{1}{1 + \exp(-20 \cdot (x - 0.5))} - 0.5.
 $$
