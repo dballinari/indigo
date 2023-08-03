@@ -77,7 +77,10 @@ Luckily, this is a well known issue in machine learning classification problems.
 
 Here I will explore an alternative approach which only partially undersamples the dataset. This approach is based on the idea that we can undersample only the data used to estimate the machine learning models, while still using all the data to estimate the treatment effect. This requires however an adjustment of the propensity scores. In what follows, I will describe the adjustment proposed by Dal Pozzolo et al. (2015).[^3] While they apply their method to the problem of unbalanced classification, it can be easily adapted to the problem of estimating propensity scores.
 
-To formalize the concept of undersampling, we can define a random variable $S_i$ which equals 1 if the observation is part of the undersampled data and 0 otherwise. It then follows that $P(S_i=1|D_i=1)=1$ since we keep all treated observations. For the non-treated once, we instead have $P(S_i = 1 | D_i=0) = \gamma < 1$. Notice that since the undersampling technique is not dependent on the covariates $X$, we have $P(S_i=1|D_i=d, X_i)=P(S_i=1|D_i=d)$. So how does undersampling affect the propensity score? This can be easily derived using Bayes' rule:
+To formalize the concept of undersampling, we can define a random variable $S_i$ which equals 1 if the observation is part of the undersampled data and 0 otherwise. 
+It then follows that $P(S_i=1|D_i=1)=1$ since we keep all treated observations. For the non-treated once, we instead have $P(S_i = 1 | D_i=0) = \gamma < 1$. 
+Notice that since the undersampling technique is not dependent on the covariates $X$, we have $P(S_i=1|D_i=d, X_i)=P(S_i=1|D_i=d)$. 
+So how does undersampling affect the propensity score? This can be easily derived using Bayes' rule:
 
 $$
 \begin{aligned}
