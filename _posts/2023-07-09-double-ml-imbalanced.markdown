@@ -11,6 +11,7 @@ tag:
 category: blog
 author: danieleballinari
 description: Adjusting for unbalanced treatment assignment in double-debiased machine learning
+width: large
 ---
 
 ## Introduction
