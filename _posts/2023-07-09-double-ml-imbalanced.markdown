@@ -286,7 +286,7 @@ So which estimator should we use in practice when dealing with unbalanced treatm
   \end{aligned}
   $$
   
-  *I skipped the last steps since, thanks to the sup-consistency of the calibrated propensity score estimator, they coincide with the proof of the double-robust estimator. The main difference to the usual proof is the fact that I had to condition not only on the (undersampled) estimation sample, but also on the treatment assignments of the entire sample $\{D_i\}_{i=1,\dots, N}$. This step is necessary, since the calibrated propensity score depends on $\hat\gamma$ which is estimated over the entire sample. Despite this, the elements in the sum are still uncorrelated (forth equality):*
+  *I skipped the last steps since, thanks to the sup-consistency of the calibrated propensity score estimator, they coincide with the proof of the double-robust estimator. The main difference to the usual proof is the fact that I had to condition not only on the (undersampled) estimation sample, but also on the treatment assignments of the entire sample $D_i$, $i=1,\dots, N$. This step is necessary, since the calibrated propensity score depends on $\hat\gamma$ which is estimated over the entire sample. Despite this, the elements in the sum are still uncorrelated (forth equality):*
   
 $$
   \begin{aligned}
