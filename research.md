@@ -28,6 +28,7 @@ layout: page
 		2021. [<a href="https://ssrn.com/abstract=3709775">Paper</a>]</li>
 	<li><i>Je ne regrette rien? An Empirical Test of Regret Theory and Stock Returns</i>, 2021, jointly with Cédric Müller. [<a href="https://ssrn.com/abstract=3786835">Paper</a>]</li>
 	<li><i>From Chatter to Action: An Index of Sustainability Sentiment</i>, 2021, jointly with Ola Mahmoud. [<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3964819">Paper</a>]</li>
+	<li><i>Calibrating doubly-robust estimators with unbalanced treatment assignment</i>, 2024. [<a href="https://arxiv.org/abs/2403.01585">Paper</a>] [<a href="https://github.com/dballinari/Simulation-CU-DML">Code</a>]</li>
 </ul>
 
 <h2>Projects & Funding</h2>
