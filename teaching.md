@@ -14,4 +14,5 @@ layout: page
 	<li>Introduction to Time Series Econometrics, Fall 2022, <i>University of Basel</i>.</li>
 	<li>Univariate Time Series Analysis, Fall 2022, <i>University of Basel</i>.</li>
 	<li>Asset Pricing, Spring 2023, <i>University of St.Gallen</i>.</li>
+	<li>Mathematics of Economists, Fall 2024, <i>University of St.Gallen</i>.</li>
 </ul>
